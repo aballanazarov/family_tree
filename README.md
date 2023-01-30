@@ -28,7 +28,7 @@ DIRECTORY STRUCTURE
 common
     config/              contains shared configurations
     mail/                contains view files for e-mails
-    models/              contains model classes used in both backend and frontend
+    models/              contains model classes used in tree
     tests/               contains tests for common classes    
 console
     config/              contains console configurations
@@ -36,25 +36,36 @@ console
     migrations/          contains database migrations
     models/              contains console-specific model classes
     runtime/             contains files generated during runtime
-backend
+tree
     assets/              contains application assets such as JavaScript and CSS
-    config/              contains backend configurations
+    config/              contains tree configurations
     controllers/         contains Web controller classes
-    models/              contains backend-specific model classes
+    models/              contains tree-specific model classes
     runtime/             contains files generated during runtime
-    tests/               contains tests for backend application    
+    tests/               contains tests for tree application    
     views/               contains view files for the Web application
     web/                 contains the entry script and Web resources
-frontend
-    assets/              contains application assets such as JavaScript and CSS
-    config/              contains frontend configurations
-    controllers/         contains Web controller classes
-    models/              contains frontend-specific model classes
-    runtime/             contains files generated during runtime
-    tests/               contains tests for frontend application
-    views/               contains view files for the Web application
-    web/                 contains the entry script and Web resources
-    widgets/             contains frontend widgets
 vendor/                  contains dependent 3rd-party packages
 environments/            contains environment-based overrides
+```
+
+PROJECT RUN COMMANDS
+--------------------
+```
+php init
+```
+```
+php yii migrate; php yii migrate --migrationPath=@yii/rbac/migrations;
+```
+```
+common -> config -> main-local.php
+...
+'db' => [
+    'class' => \yii\db\Connection::class,
+    'dsn' => 'mysql:host=YOUR_HOST;dbname=YOUR_DATABASE',
+    'username' => 'YOUR_USERNAME',
+    'password' => 'YOUR_PASSWORD',
+    'charset' => 'utf8',
+],
+...
 ```
