@@ -38,3 +38,6 @@ phpunit.phar
 /tree/web/index.php
 /tree/web/index-test.php
 /tree/web/robots.txt
+
+# ignore Rbac generation file
+all_actions.txt
