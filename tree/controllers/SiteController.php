@@ -3,6 +3,7 @@
 namespace tree\controllers;
 
 use common\models\LoginForm;
+use tree\assets\NullScrollAsset;
 use Yii;
 use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
@@ -14,6 +15,12 @@ use yii\web\Response;
  */
 class SiteController extends Controller
 {
+    public function init()
+    {
+        NullScrollAsset::register($this->view);
+        parent::init();
+    }
+
     /**
      * {@inheritdoc}
      */
