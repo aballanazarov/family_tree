@@ -1,6 +1,8 @@
 <?php
 
 use yii\helpers\Html;
+use yii\helpers\Url;
+use yii\widgets\ActiveForm;
 
 /** @var yii\web\View $this */
 /** @var tree\models\Tree $model */
@@ -18,4 +20,9 @@ $this->params['breadcrumbs'][] = 'Update';
         'model' => $model,
     ]) ?>
 
+    <?php if (!empty($model->id)) : ?>
+        <?php $delete = ActiveForm::begin(['method' => 'POST', 'action' => '/tree/delete?id=' . $model->id]) ?>
+            <?= Html::submitButton('Delete', ['class' => 'btn btn-danger']) ?>
+        <?php ActiveForm::end() ?>
+    <?php endif; ?>
 </div>

@@ -33,7 +33,7 @@ class TreeController extends Controller
 
     public function actionIndex()
     {
-        $trees = Tree::find()->with('tree')->all();
+        $trees = Tree::find()->all();
         return $this->render('index', [
             'trees' => $trees,
         ]);
@@ -52,7 +52,8 @@ class TreeController extends Controller
 
         if ($this->request->isPost) {
             if ($model->load($this->request->post()) && $model->save()) {
-                return $this->redirect(['view', 'id' => $model->id]);
+//                return $this->redirect(['view', 'id' => $model->id]);
+                return $this->redirect(['index']);
             }
         } else {
             $model->loadDefaultValues();
@@ -69,6 +70,7 @@ class TreeController extends Controller
 
         if ($this->request->isPost && $model->load($this->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
+//            return $this->redirect(['index']);
         }
 
         return $this->render('update', [

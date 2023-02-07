@@ -50,6 +50,14 @@ html {
     top: var(--navbar-height);
 }
 
+/* LOGIN PAGE : BEGIN */
+
+
+
+/* LOGIN PAGE : END */
+
+/** TREE STYLE : BEGIN */
+
 .tree {
     width: max-content;
     height: max-content;
@@ -136,10 +144,12 @@ html {
     color: var(--main-dark-color);
     display: inline-block;
     cursor: pointer;
-    /*padding: var(--right-line) var(--top-line);*/
-    padding: var(--top-line) var(--right-line);
+    padding: var(--right-line) var(--top-line);
+    writing-mode: horizontal-tb;
+    /*padding: var(--top-line) var(--right-line);*/
+    /*writing-mode: vertical-rl;*/
+    /*writing-mode: vertical-lr;*/
     text-orientation: mixed;
-    writing-mode: vertical-lr;
 
     border-radius: var(--border-radius);
     -webkit-border-radius: var(--border-radius);
@@ -162,3 +172,5 @@ html {
 .tree li p:hover + ul ul::before {
     border-color: var(--main-dark-bg-color-hover);
 }
+
+/** TREE STYLE : END */

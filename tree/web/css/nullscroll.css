@@ -1,4 +1,19 @@
 ::-webkit-scrollbar {
-    width: 0;
-    height: 0;
+    width: 5px;
+    height: 5px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+    background: var(--main-ligt-bg-color);
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+    background: var(--main-dark-bg-color);
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+    background: var(--main-dark-bg-color-hover);
 }

@@ -4,6 +4,7 @@ namespace tree\controllers;
 
 use common\models\LoginForm;
 use tree\assets\NullScrollAsset;
+use tree\models\Tree;
 use Yii;
 use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
@@ -69,7 +70,13 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
-        return $this->render('index');
+        $trees = Tree::find()
+            ->where(['parent_id' => null])
+            ->all();
+
+        return $this->render('index',[
+            'trees' => $trees,
+        ]);
     }
 
     /**
