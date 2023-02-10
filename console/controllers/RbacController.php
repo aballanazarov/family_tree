@@ -2,7 +2,7 @@
 
 namespace console\controllers;
 
-use tree\services\UserRole;
+use common\constant\UserRole;
 use Yii;
 use yii\console\Controller;
 use yii\helpers\FileHelper;
@@ -21,7 +21,16 @@ class RbacController extends Controller
             ['name' => 'site_index', 'description' => '', 'rule' => []],
             ['name' => 'site_login', 'description' => '', 'rule' => []],
             ['name' => 'site_logout', 'description' => '', 'rule' => []],
-            ['name' => 'site_s', 'description' => '', 'rule' => []],
+            ['name' => 'tree_create', 'description' => '', 'rule' => []],
+            ['name' => 'tree_delete', 'description' => '', 'rule' => []],
+            ['name' => 'tree_index', 'description' => '', 'rule' => []],
+            ['name' => 'tree_update', 'description' => '', 'rule' => []],
+            ['name' => 'tree_view', 'description' => '', 'rule' => []],
+            ['name' => 'user_create', 'description' => '', 'rule' => []],
+            ['name' => 'user_delete', 'description' => '', 'rule' => []],
+            ['name' => 'user_index', 'description' => '', 'rule' => []],
+            ['name' => 'user_update', 'description' => '', 'rule' => []],
+            ['name' => 'user_view', 'description' => '', 'rule' => []],
         ];
 
         $roles = [

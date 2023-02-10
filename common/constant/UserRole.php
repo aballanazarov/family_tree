@@ -1,6 +1,6 @@
 <?php
 
-namespace tree\services;
+namespace common\constant;
 
 use Yii;
 

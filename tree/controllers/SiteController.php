@@ -11,9 +11,7 @@ use yii\filters\AccessControl;
 use yii\web\Controller;
 use yii\web\Response;
 
-/**
- * Site controller
- */
+
 class SiteController extends Controller
 {
     public function init()
@@ -22,9 +20,7 @@ class SiteController extends Controller
         parent::init();
     }
 
-    /**
-     * {@inheritdoc}
-     */
+
     public function behaviors()
     {
         return [
@@ -45,15 +41,15 @@ class SiteController extends Controller
             'verbs' => [
                 'class' => VerbFilter::class,
                 'actions' => [
-                    'logout' => ['post'],
+                    'index' => ['GET'],
+                    'login' => ['GET', 'POST'],
+                    'logout' => ['POST'],
                 ],
             ],
         ];
     }
 
-    /**
-     * {@inheritdoc}
-     */
+
     public function actions()
     {
         return [
@@ -63,11 +59,7 @@ class SiteController extends Controller
         ];
     }
 
-    /**
-     * Displays homepage.
-     *
-     * @return string
-     */
+
     public function actionIndex()
     {
         $trees = Tree::find()
@@ -79,11 +71,7 @@ class SiteController extends Controller
         ]);
     }
 
-    /**
-     * Login action.
-     *
-     * @return string|Response
-     */
+
     public function actionLogin()
     {
         if (!Yii::$app->user->isGuest) {
@@ -104,11 +92,7 @@ class SiteController extends Controller
         ]);
     }
 
-    /**
-     * Logout action.
-     *
-     * @return Response
-     */
+
     public function actionLogout()
     {
         Yii::$app->user->logout();

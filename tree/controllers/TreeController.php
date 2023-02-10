@@ -4,32 +4,43 @@ namespace tree\controllers;
 
 use common\models\Tree;
 use common\models\TreeSearch;
+use yii\filters\AccessControl;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
-/**
- * TreeController implements the CRUD actions for Tree model.
- */
+
 class TreeController extends Controller
 {
-    /**
-     * @inheritDoc
-     */
     public function behaviors()
     {
         return array_merge(
             parent::behaviors(),
             [
+                'access' => [
+                    'class' => AccessControl::class,
+                    'rules' => [
+                        [
+                            'actions' => ['index', 'view', 'create', 'update', 'delete'],
+                            'allow' => true,
+                            'roles' => ['@'],
+                        ],
+                    ],
+                ],
                 'verbs' => [
                     'class' => VerbFilter::className(),
                     'actions' => [
+                        'index' => ['GET'],
+                        'view' => ['GET'],
+                        'create' => ['GET', 'POST'],
+                        'update' => ['GET', 'POST'],
                         'delete' => ['POST'],
                     ],
                 ],
             ]
         );
     }
+
 
     public function actionIndex()
     {
@@ -39,12 +50,14 @@ class TreeController extends Controller
         ]);
     }
 
+
     public function actionView($id)
     {
         return $this->render('view', [
             'model' => $this->findModel($id),
         ]);
     }
+
 
     public function actionCreate()
     {
@@ -64,6 +77,7 @@ class TreeController extends Controller
         ]);
     }
 
+
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
@@ -78,12 +92,14 @@ class TreeController extends Controller
         ]);
     }
 
+
     public function actionDelete($id)
     {
         $this->findModel($id)->delete();
 
         return $this->redirect(['index']);
     }
+
 
     protected function findModel($id)
     {

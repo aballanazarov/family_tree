@@ -2,8 +2,8 @@
 
 namespace console\controllers;
 
-use tree\models\User;
-use tree\services\UserRole;
+use common\models\User;
+use common\constant\UserRole;
 use Yii;
 use yii\console\Controller;
 use yii\helpers\FileHelper;
