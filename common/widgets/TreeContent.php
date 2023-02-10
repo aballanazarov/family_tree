@@ -2,7 +2,7 @@
 
 namespace common\widgets;
 
-use tree\models\Tree;
+use common\models\Tree;
 use yii\bootstrap5\Widget;
 
 class TreeContent extends Widget

@@ -4,7 +4,7 @@ namespace tree\controllers;
 
 use common\models\LoginForm;
 use tree\assets\NullScrollAsset;
-use tree\models\Tree;
+use common\models\Tree;
 use Yii;
 use yii\filters\VerbFilter;
 use yii\filters\AccessControl;

@@ -5,7 +5,7 @@
 /** @var Tree[] $trees */
 
 use common\widgets\TreeContent;
-use tree\models\Tree;
+use common\models\Tree;
 
 $this->title = 'My Yii Application';
 ?>

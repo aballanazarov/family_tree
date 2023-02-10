@@ -5,7 +5,7 @@ use yii\helpers\Url;
 use yii\widgets\ActiveForm;
 
 /** @var yii\web\View $this */
-/** @var tree\models\Tree $model */
+/** @var common\models\Tree $model */
 /** @var yii\widgets\ActiveForm $form */
 ?>
 
@@ -44,6 +44,13 @@ use yii\widgets\ActiveForm;
     </div>
     <div class="form-group">
         <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>
+        <?php if (isset($update) && $update) : ?>
+            <?php if (!empty($model->id)) : ?>
+                <?php $delete = ActiveForm::begin(['method' => 'POST', 'action' => '/tree/delete?id=' . $model->id]) ?>
+                <?= Html::submitButton('Delete', ['class' => 'btn btn-danger']) ?>
+                <?php ActiveForm::end() ?>
+            <?php endif; ?>
+        <?php endif; ?>
     </div>
 
     <?php ActiveForm::end(); ?>

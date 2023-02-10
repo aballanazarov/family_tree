@@ -3,13 +3,13 @@
 use yii\helpers\Html;
 
 /** @var yii\web\View $this */
-/** @var tree\models\Tree $model */
+/** @var common\models\Tree $model */
 
-$this->title = 'Create Tree';
+$this->title = 'Add new People';
 $this->params['breadcrumbs'][] = ['label' => 'Trees', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="tree-create">
+<div class="container mt-5">
 
     <h1><?= Html::encode($this->title) ?></h1>
 

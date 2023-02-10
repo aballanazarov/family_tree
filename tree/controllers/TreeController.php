@@ -2,8 +2,8 @@
 
 namespace tree\controllers;
 
-use tree\models\Tree;
-use tree\models\TreeSearch;
+use common\models\Tree;
+use common\models\TreeSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;

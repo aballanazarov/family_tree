@@ -1,6 +1,6 @@
 <?php
 
-namespace tree\models;
+namespace common\models;
 
 use Yii;
 
@@ -15,11 +15,13 @@ use Yii;
  * @property int|null $spouse_birthday День рождения супруг(а)
  * @property int|null $spouse_death_date День рождения человека
  * @property int|null $parent_id Родительский идентификатор
+ * @property int $author_id Автор
  * @property int $created_at
  * @property int|null $updated_at
  *
  * @property Tree $parent
  * @property Tree[] $trees
+ * @property User $author
  */
 class Tree extends \yii\db\ActiveRecord
 {
@@ -37,11 +39,13 @@ class Tree extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['name'], 'required'],
+            [['created_at'], 'default', 'value' => time()],
+            [['author_id'], 'default', 'value' => Yii::$app->user->identity->getId()],
+            [['name', 'author_id', 'created_at'], 'required'],
             [['birthday', 'death_date', 'spouse_birthday', 'spouse_death_date', 'parent_id', 'created_at', 'updated_at'], 'integer'],
             [['name', 'spouse_name'], 'string', 'max' => 255],
-            [['created_at'], 'default', 'value' => time()],
             [['parent_id'], 'exist', 'skipOnError' => true, 'targetClass' => Tree::class, 'targetAttribute' => ['parent_id' => 'id']],
+            [['author_id'], 'exist', 'skipOnError' => true, 'targetClass' => User::class, 'targetAttribute' => ['author_id' => 'id']],
         ];
     }
 
@@ -67,6 +71,7 @@ class Tree extends \yii\db\ActiveRecord
             'spouse_birthday' => 'Spouse Birthday',
             'spouse_death_date' => 'Spouse Death Date',
             'parent_id' => 'Parent ID',
+            'author_id' => 'Author ID',
             'created_at' => 'Created At',
             'updated_at' => 'Updated At',
         ];
@@ -90,5 +95,15 @@ class Tree extends \yii\db\ActiveRecord
     public function getTrees()
     {
         return $this->hasMany(Tree::class, ['parent_id' => 'id']);
+    }
+
+    /**
+     * Gets query for [[Author]].
+     *
+     * @return \yii\db\ActiveQuery
+     */
+    public function getAuthor()
+    {
+        return $this->hasOne(User::class, ['id' => 'author_id']);
     }
 }

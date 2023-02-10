@@ -4,7 +4,7 @@
 
 /** @var Tree[] $trees */
 
-use tree\models\Tree;
+use common\models\Tree;
 use yii\helpers\Url;
 
 $this->title = 'Trees';

@@ -3,9 +3,9 @@
 use yii\db\Migration;
 
 /**
- * Handles the creation of table `{{%ftree}}`.
+ * Handles the creation of table `{{%tree}}`.
  */
-class m230130_100508_create_ftree_table extends Migration
+class m230130_100508_create_tree_table extends Migration
 {
     /**
      * {@inheritdoc}
@@ -21,12 +21,14 @@ class m230130_100508_create_ftree_table extends Migration
             'spouse_birthday' => $this->integer()->null()->comment("День рождения супруг(а)"),
             'spouse_death_date' => $this->integer()->null()->comment("День рождения человека"),
             'parent_id' => $this->integer()->null()->comment("Родительский идентификатор"),
-            'author' => $this->integer()->null()->comment("Автор"),
+            'author_id' => $this->integer()->notNull()->comment("Автор"),
             'created_at' => $this->integer()->notNull(),
             'updated_at' => $this->integer()->null(),
         ]);
 
         $this->addForeignKey('fk-tree-parent_id', '{{%tree}}', 'parent_id', '{{%tree}}', 'id', 'CASCADE');
+        $this->addForeignKey('fk-tree-author_id', '{{%tree}}', 'author_id', '{{%user}}', 'id', 'CASCADE');
+
     }
 
     /**
@@ -35,6 +37,7 @@ class m230130_100508_create_ftree_table extends Migration
     public function safeDown()
     {
         $this->dropForeignKey('fk-tree-parent_id', '{{%tree}}');
+        $this->dropForeignKey('fk-tree-author_id', '{{%tree}}');
         $this->dropTable('{{%tree}}');
     }
 }

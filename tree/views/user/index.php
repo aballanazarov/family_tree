@@ -1,13 +1,13 @@
 <?php
 
-use tree\models\User;
+use common\models\User;
 use yii\helpers\Html;
 use yii\helpers\Url;
 use yii\grid\ActionColumn;
 use yii\grid\GridView;
 
 /** @var yii\web\View $this */
-/** @var tree\models\UserSearch $searchModel */
+/** @var common\models\UserSearch $searchModel */
 /** @var yii\data\ActiveDataProvider $dataProvider */
 
 $this->title = 'Users';

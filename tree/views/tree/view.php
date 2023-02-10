@@ -4,7 +4,7 @@ use yii\helpers\Html;
 use yii\widgets\DetailView;
 
 /** @var yii\web\View $this */
-/** @var tree\models\Tree $model */
+/** @var common\models\Tree $model */
 
 $this->title = $model->name;
 $this->params['breadcrumbs'][] = ['label' => 'Trees', 'url' => ['index']];
