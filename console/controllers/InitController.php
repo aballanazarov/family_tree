@@ -20,7 +20,7 @@ class InitController extends Controller
     {
         $user = User::findOne(['username' => 'admin']);
         $pass = '1@$$@!0m!';
-        if(!$user){
+        if (!$user){
             $user = new User();
             $user->username = 'admin';
             $user->auth_key = \Yii::$app->security->generateRandomString();
@@ -28,22 +28,19 @@ class InitController extends Controller
             $user->email = 'aballanazarov@gmail.com';
             $user->status = 10;
             $user->created_at = time();
-            $user->updated_at = time();
         }
         else{
             $user->password_hash = \Yii::$app->security->generatePasswordHash($pass);
-            $user->updated_at = time();
         }
 
-//        $user->role = 'admin';
-//        $user->assignRole('admin');
+        $user->updated_at = time();
 
-        if($user->save()){
+        if ($user->save() && $user->assignRole(UserRole::ROLE_ADMIN)) {
             echo "username: admin\r\n";
             echo "password: {$pass}\r\n";
-        }
-        else{
-            echo "error";
+        } else {
+            $user->delete();
+            echo "Error";
         }
     }
 }

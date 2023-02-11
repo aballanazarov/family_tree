@@ -2,6 +2,7 @@
 
 namespace tree\controllers;
 
+use common\constant\UserRole;
 use common\models\User;
 use common\models\UserSearch;
 use yii\filters\AccessControl;
@@ -44,20 +45,12 @@ class UserController extends Controller
 
     public function actionIndex()
     {
-        $searchModel = new UserSearch();
-        $dataProvider = $searchModel->search($this->request->queryParams);
+        $users = User::find()
+            ->orderBy(['created_at' => SORT_ASC])
+            ->all();
 
         return $this->render('index', [
-            'searchModel' => $searchModel,
-            'dataProvider' => $dataProvider,
-        ]);
-    }
-
-
-    public function actionView($id)
-    {
-        return $this->render('view', [
-            'model' => $this->findModel($id),
+            'users' => $users,
         ]);
     }
 
@@ -66,10 +59,8 @@ class UserController extends Controller
     {
         $model = new User();
 
-        if ($this->request->isPost) {
-            if ($model->load($this->request->post()) && $model->save()) {
-                return $this->redirect(['view', 'id' => $model->id]);
-            }
+        if ($this->request->isPost && $model->load($this->request->post()) && $model->validate() && $model->save() && $model->assignRole(UserRole::ROLE_USER)) {
+            return $this->redirect(['index']);
         } else {
             $model->loadDefaultValues();
         }
@@ -84,8 +75,8 @@ class UserController extends Controller
     {
         $model = $this->findModel($id);
 
-        if ($this->request->isPost && $model->load($this->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+        if ($this->request->isPost && $model->load($this->request->post()) && $model->validate() && $model->save()) {
+            return $this->redirect(['index']);
         }
 
         return $this->render('update', [

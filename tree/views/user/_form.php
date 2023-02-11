@@ -1,39 +1,91 @@
 <?php
 
+use common\widgets\Button;
+use common\widgets\Input;
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
 /** @var yii\web\View $this */
 /** @var common\models\User $model */
-/** @var yii\widgets\ActiveForm $form */
+/** @var yii\bootstrap5\ActiveForm $form */
 ?>
 
-<div class="user-form">
+<?php
+$form = ActiveForm::begin([
+    'options' => [
+        'class' => ['row']
+    ],
+]);
+?>
 
-    <?php $form = ActiveForm::begin(); ?>
 
-    <?= $form->field($model, 'username')->textInput(['maxlength' => true]) ?>
+<?=
+Input::widget([
+    'label' => 'Username',
+    'placeholder' => 'Username',
+    'name' => 'User[username]',
+    'value' => $model->username,
+    'maxlength' => 255,
+    'errors' => $model->getErrors('username'),
+]);
+?>
 
-    <?= $form->field($model, 'auth_key')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'password_hash')->textInput(['maxlength' => true]) ?>
+<?php if (can('admin')) : ?>
+    <?=
+    Input::widget([
+        'label' => 'Password',
+        'placeholder' => 'Password',
+        'name' => 'User[new_password]',
+        'value' => $model->new_password ?? null,
+        'maxlength' => 255,
+        'errors' => $model->getErrors('new_password'),
+        'type' => 'password',
+    ]);
+    ?>
+<?php endif; ?>
 
-    <?= $form->field($model, 'password_reset_token')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'email')->textInput(['maxlength' => true]) ?>
+<?=
+Input::widget([
+    'label' => 'Email',
+    'placeholder' => 'Email',
+    'name' => 'User[email]',
+    'value' => $model->email,
+    'maxlength' => 255,
+    'errors' => $model->getErrors('email'),
+]);
+?>
 
-    <?= $form->field($model, 'status')->textInput() ?>
+<?php
+ActiveForm::end();
+?>
 
-    <?= $form->field($model, 'created_at')->textInput() ?>
+<?=
+Button::widget([
+    'label' => 'Сохранить',
+    'type' => 'submit',
+    'formId' => $form->getId(),
+])
+?>
 
-    <?= $form->field($model, 'updated_at')->textInput() ?>
+<?php if (isset($update) && $update && !empty($model->id)) : ?>
+    <?=
+    Button::widget([
+        'label' => 'Отмена',
+        'type' => 'cancel',
+        'formId' => $form->getId(),
+        'classList' => 'btn-warning',
+    ]);
+    ?>
 
-    <?= $form->field($model, 'verification_token')->textInput(['maxlength' => true]) ?>
-
-    <div class="form-group">
-        <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>
-    </div>
-
-    <?php ActiveForm::end(); ?>
-
-</div>
+    <?=
+    Html::a(Yii::t('app', 'Удалить'), ['delete', 'id'=>$model->id], [
+        'class' => 'btn mb-3 btn-danger',
+        'data' => [
+            'method'=>'POST',
+            'confirm'=>Yii::t('app', 'Вы уверен ?'),
+        ],
+    ])
+    ?>
+<?php endif; ?>

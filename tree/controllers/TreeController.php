@@ -49,16 +49,9 @@ class TreeController extends Controller
         $trees = Tree::find()
             ->orderBy(['birthday' => SORT_ASC])
             ->all();
+
         return $this->render('index', [
             'trees' => $trees,
-        ]);
-    }
-
-
-    public function actionView($id)
-    {
-        return $this->render('view', [
-            'model' => $this->findModel($id),
         ]);
     }
 
@@ -69,7 +62,6 @@ class TreeController extends Controller
 
         if ($this->request->isPost) {
             if ($model->load($this->request->post()) && $model->save()) {
-                //return $this->redirect(['view', 'id' => $model->id]);
                 return $this->redirect(['index']);
             }
         } else {
@@ -92,7 +84,6 @@ class TreeController extends Controller
         $model = $this->findModel($id);
 
         if ($this->request->isPost && $model->load($this->request->post()) && $model->save()) {
-            //return $this->redirect(['view', 'id' => $model->id]);
             return $this->redirect(['index']);
         }
 

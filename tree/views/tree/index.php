@@ -1,7 +1,6 @@
 <?php
 
 /** @var yii\web\View $this */
-
 /** @var Tree[] $trees */
 
 use common\helpers\Add;

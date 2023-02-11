@@ -14,11 +14,13 @@ use yii\widgets\ActiveForm;
 /** @var yii\widgets\ActiveForm $form */
 ?>
 
-<?php $form = ActiveForm::begin([
+<?php
+$form = ActiveForm::begin([
     'options' => [
         'class' => ['row']
     ],
-]); ?>
+]);
+?>
 
 <?=
 Input::widget([
@@ -105,7 +107,9 @@ echo Select::widget([
 ]);
 ?>
 
-<?php ActiveForm::end(); ?>
+<?php
+ActiveForm::end();
+?>
 
 <?=
 Button::widget([
@@ -121,7 +125,17 @@ Button::widget([
         'label' => 'Отмена',
         'type' => 'cancel',
         'formId' => $form->getId(),
-        'classList' => 'btn-danger',
+        'classList' => 'btn-warning',
     ]);
+    ?>
+
+    <?=
+    Html::a(Yii::t('app', 'Удалить'), ['delete', 'id'=>$model->id], [
+        'class' => 'btn mb-3 btn-danger',
+        'data' => [
+            'method'=>'POST',
+            'confirm'=>Yii::t('app', 'Вы уверен ?'),
+        ],
+    ])
     ?>
 <?php endif; ?>

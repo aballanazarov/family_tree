@@ -18,15 +18,24 @@ use yii\helpers\Url;
                     <li class="nav-item">
                         <a class="nav-link active" aria-current="page" href="/">Home</a>
                     </li>
+
+                    <?php if (can('user')) : ?>
                     <li class="nav-item">
                         <a class="nav-link" href="<?= Url::to(['tree/index']);?>">People</a>
                     </li>
+                    <?php endif; ?>
+
+                    <?php if (can('admin')) : ?>
+                        <li class="nav-items">
+                            <a class="nav-link" href="<?= Url::to(['user/index']);?>">Users</a>
+                        </li>
+                    <?php endif; ?>
                 </ul>
 
                 <?php
                 $form = ActiveForm::begin([
                     'method' => "POST",
-                    'action' => 'site/logout'
+                    'action' => '/site/logout'
                 ]); ?>
                 <button class="logout btn btn-light" type="submit">Logout</button>
                 <?php ActiveForm::end(); ?>
