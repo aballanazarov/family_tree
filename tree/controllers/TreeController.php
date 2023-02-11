@@ -66,14 +66,8 @@ class TreeController extends Controller
         $model = new Tree();
 
         if ($this->request->isPost) {
-
-            DateTimeHelper::timeToStr(
-                DateTimeHelper::strToTime($this->request->post('Tree')['birthday']),
-                'Y-m-d H:i:s'
-            );
-            vdd('end');
             if ($model->load($this->request->post()) && $model->save()) {
-//                return $this->redirect(['view', 'id' => $model->id]);
+                //return $this->redirect(['view', 'id' => $model->id]);
                 return $this->redirect(['index']);
             }
         } else {
@@ -94,8 +88,8 @@ class TreeController extends Controller
         $model = $this->findModel($id);
 
         if ($this->request->isPost && $model->load($this->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
-//            return $this->redirect(['index']);
+            //return $this->redirect(['view', 'id' => $model->id]);
+            return $this->redirect(['index']);
         }
 
         $people = Tree::find()->all();

@@ -1,7 +1,7 @@
 <?php
 
 use common\helpers\Option;
-use common\widgets\Button;
+use common\services\DateTimeHelper;use common\widgets\Button;
 use common\widgets\Input;
 use common\widgets\Select;
 use yii\helpers\Html;
@@ -36,7 +36,7 @@ Input::widget([
     'label' => 'Birthday',
     'placeholder' => 'DD.MM.YYYY',
     'name' => 'Tree[birthday]',
-    'value' => $model->birthday,
+    'value' => !empty($model->birthday) && is_int($model->birthday) ? DateTimeHelper::timeToStr($model->birthday) : $model->birthday,
     'errors' => $model->getErrors('birthday'),
     'type' => 'date',
 //    'min' => '01.01.1000',
@@ -49,7 +49,7 @@ Input::widget([
     'label' => 'Death Date',
     'placeholder' => 'Death Date',
     'name' => 'Tree[death_date]',
-    'value' => $model->death_date,
+    'value' => !empty($model->death_date) && is_int($model->death_date) ? DateTimeHelper::timeToStr($model->death_date) : $model->death_date,
     'errors' => $model->getErrors('death_date'),
     'type' => 'date',
 ]);
@@ -71,7 +71,7 @@ Input::widget([
     'label' => 'Spouse Birthday',
     'placeholder' => 'Spouse Birthday',
     'name' => 'Tree[spouse_birthday]',
-    'value' => $model->spouse_birthday,
+    'value' => !empty($model->spouse_birthday) && is_int($model->spouse_birthday) ? DateTimeHelper::timeToStr($model->spouse_birthday) : $model->spouse_birthday,
     'errors' => $model->getErrors('spouse_birthday'),
     'type' => 'date',
 ]);
@@ -82,7 +82,7 @@ Input::widget([
     'label' => 'Spouse Death Date',
     'placeholder' => 'Spouse Death Date',
     'name' => 'Tree[spouse_death_date]',
-    'value' => $model->spouse_death_date,
+    'value' => !empty($model->spouse_death_date) && is_int($model->spouse_death_date) ? DateTimeHelper::timeToStr($model->spouse_death_date) : $model->spouse_death_date,
     'errors' => $model->getErrors('spouse_death_date'),
     'type' => 'date',
 ]);
@@ -92,7 +92,7 @@ Input::widget([
 $options = [];
 
 foreach ($people as $person) {
-    $options[] = new Option($person->id, $person->name, $person->user_id == $model->parent_id);
+    $options[] = new Option($person->id, $person->name, !empty($model->parent_id) && $person->id == $model->parent_id);
 }
 
 echo Select::widget([
@@ -100,6 +100,8 @@ echo Select::widget([
     'name' => 'Tree[parent_id]',
     'items' => $options,
     'errors' => $model->getErrors('parent_id'),
+    'firstOption' => true,
+    'firstOptionLabel' => 'Not select',
 ]);
 ?>
 

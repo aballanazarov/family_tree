@@ -16,18 +16,8 @@ class DateTimeHelper
     }
 
 
-    public static function strToTime(string $strTime, string $format = 'Y-m-d'): ?int
+    public static function strToTime(string $strTime): ?int
     {
-        if (!empty($strTime)) {
-            $time = DateTime::createFromFormat($format, $strTime);
-
-            if (!empty($time)) {
-                return $time->getTimestamp();
-            }
-
-            return null;
-        }
-
-        return null;
+        return strtotime($strTime);
     }
 }
