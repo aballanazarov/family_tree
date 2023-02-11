@@ -24,4 +24,6 @@ $config = yii\helpers\ArrayHelper::merge(
     require __DIR__ . '/../config/test-local.php'
 );
 
+require __DIR__ . "\..\..\common\config\utils.php";
+
 (new yii\web\Application($config))->run();

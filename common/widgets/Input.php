@@ -11,7 +11,9 @@ class Input extends Widget
     public string $placeholder;
     public string $name;
     public ?string $value;
-    public ?int $maxlength;
+    public ?int $maxlength = null;
+    public ?string $min = null;
+    public ?string $max = null;
     public ?array $errors = null;
     public string $type = 'text';
 
@@ -26,6 +28,8 @@ class Input extends Widget
         id="{{viewId}}" 
         placeholder="{{placeholder}}" 
         {{maxlength}}
+        {{min}}
+        {{max}}
         {{value}}
     >
     {{error}}

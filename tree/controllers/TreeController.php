@@ -2,8 +2,10 @@
 
 namespace tree\controllers;
 
+use common\services\DateTimeHelper;
 use common\models\Tree;
 use common\models\TreeSearch;
+use common\models\User;
 use yii\filters\AccessControl;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
@@ -64,6 +66,12 @@ class TreeController extends Controller
         $model = new Tree();
 
         if ($this->request->isPost) {
+
+            DateTimeHelper::timeToStr(
+                DateTimeHelper::strToTime($this->request->post('Tree')['birthday']),
+                'Y-m-d H:i:s'
+            );
+            vdd('end');
             if ($model->load($this->request->post()) && $model->save()) {
 //                return $this->redirect(['view', 'id' => $model->id]);
                 return $this->redirect(['index']);
@@ -72,8 +80,11 @@ class TreeController extends Controller
             $model->loadDefaultValues();
         }
 
+        $people = Tree::find()->all();
+
         return $this->render('create', [
             'model' => $model,
+            'people' => $people,
         ]);
     }
 
@@ -87,8 +98,11 @@ class TreeController extends Controller
 //            return $this->redirect(['index']);
         }
 
+        $people = Tree::find()->all();
+
         return $this->render('update', [
             'model' => $model,
+            'people' => $people,
         ]);
     }
 
