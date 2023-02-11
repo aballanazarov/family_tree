@@ -46,7 +46,9 @@ class TreeController extends Controller
 
     public function actionIndex()
     {
-        $trees = Tree::find()->all();
+        $trees = Tree::find()
+            ->orderBy(['birthday' => SORT_ASC])
+            ->all();
         return $this->render('index', [
             'trees' => $trees,
         ]);
@@ -74,7 +76,9 @@ class TreeController extends Controller
             $model->loadDefaultValues();
         }
 
-        $people = Tree::find()->all();
+        $people = Tree::find()
+            ->orderBy(['birthday' => SORT_ASC])
+            ->all();
 
         return $this->render('create', [
             'model' => $model,
@@ -92,7 +96,9 @@ class TreeController extends Controller
             return $this->redirect(['index']);
         }
 
-        $people = Tree::find()->all();
+        $people = Tree::find()
+            ->orderBy(['birthday' => SORT_ASC])
+            ->all();
 
         return $this->render('update', [
             'model' => $model,

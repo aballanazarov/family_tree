@@ -97,7 +97,7 @@ class Tree extends \yii\db\ActiveRecord
 
     public function getTrees()
     {
-        return $this->hasMany(Tree::class, ['parent_id' => 'id']);
+        return $this->hasMany(Tree::class, ['parent_id' => 'id'])->orderBy(['birthday' => SORT_ASC]);
     }
 
 
