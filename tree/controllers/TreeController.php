@@ -6,6 +6,7 @@ use common\services\DateTimeHelper;
 use common\models\Tree;
 use common\models\TreeSearch;
 use common\models\User;
+use Yii;
 use yii\filters\AccessControl;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
@@ -47,6 +48,7 @@ class TreeController extends Controller
     public function actionIndex()
     {
         $trees = Tree::find()
+            ->where(['author_id' => Yii::$app->user->identity->getId()])
             ->orderBy(['birthday' => SORT_ASC])
             ->all();
 
@@ -69,6 +71,7 @@ class TreeController extends Controller
         }
 
         $people = Tree::find()
+            ->where(['author_id' => Yii::$app->user->identity->getId()])
             ->orderBy(['birthday' => SORT_ASC])
             ->all();
 
@@ -88,6 +91,7 @@ class TreeController extends Controller
         }
 
         $people = Tree::find()
+            ->where(['author_id' => Yii::$app->user->identity->getId()])
             ->orderBy(['birthday' => SORT_ASC])
             ->all();
 

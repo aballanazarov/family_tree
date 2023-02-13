@@ -59,7 +59,13 @@ class UserController extends Controller
     {
         $model = new User();
 
-        if ($this->request->isPost && $model->load($this->request->post()) && $model->validate() && $model->save() && $model->assignRole(UserRole::ROLE_USER)) {
+        if (
+            $this->request->isPost
+            && $model->load($this->request->post())
+            && $model->validate()
+            && $model->save()
+            && $model->assignRole(UserRole::ROLE_USER)
+        ) {
             return $this->redirect(['index']);
         } else {
             $model->loadDefaultValues();
@@ -75,7 +81,12 @@ class UserController extends Controller
     {
         $model = $this->findModel($id);
 
-        if ($this->request->isPost && $model->load($this->request->post()) && $model->validate() && $model->save()) {
+        if (
+            $this->request->isPost
+            && $model->load($this->request->post())
+            && $model->validate()
+            && $model->save()
+        ) {
             return $this->redirect(['index']);
         }
 

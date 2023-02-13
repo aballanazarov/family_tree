@@ -8,6 +8,9 @@ use yii\widgets\ActiveForm;
 /** @var yii\web\View $this */
 /** @var common\models\User $model */
 /** @var yii\bootstrap5\ActiveForm $form */
+
+vd($model->attributes);
+vd($model->errors);
 ?>
 
 <?php
@@ -31,7 +34,7 @@ Input::widget([
 ?>
 
 
-<?php if (can('admin')) : ?>
+<?php if (can('admin') && !isset($update)) : ?>
     <?=
     Input::widget([
         'label' => 'Password',
